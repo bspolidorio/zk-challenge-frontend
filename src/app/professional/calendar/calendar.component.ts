@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-schedule',
-  templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss'],
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
 })
-export class ScheduleComponent implements OnInit {
+export class CalendarComponent implements OnInit {
   availabilitySlots = null;
   today = moment().format('YYYY-MM-DD');
   firstDay = this.today;

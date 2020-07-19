@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProfessionalComponent } from './professional/professional.component';
-import { ScheduleComponent } from './professional/schedule/schedule.component';
+import { CalendarComponent } from './professional/calendar/calendar.component';
 import { AvatarComponent } from './professional/avatar/avatar.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -13,7 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   declarations: [
     AppComponent,
     ProfessionalComponent,
-    ScheduleComponent,
+    CalendarComponent,
     AvatarComponent,
   ],
   imports: [
