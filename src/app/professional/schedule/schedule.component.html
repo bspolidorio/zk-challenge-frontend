@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="schedule-header">
-    <div class="schedule-title">Schedule your session!</div>
-    <div class="schedule-timezone">
+  <div class="calendar-header">
+    <div class="calendar-title">Schedule your session!</div>
+    <div class="calendar-timezone">
       Timezone: {{ userLocale }} ({{ userLocalTimezone }})
     </div>
   </div>
@@ -15,7 +15,7 @@
         <a
           class="back fa fa-chevron-circle-left"
           aria-hidden="true"
-          (click)="backed.emit(weekDays[0])"
+          (click)="backWeek(weekDays[0])"
         ></a
       ></ng-template>
     </div>
@@ -48,30 +48,28 @@
     <a
       class="forward fa fa-chevron-circle-right"
       aria-hidden="true"
-      (click)="forwarded.emit(weekDays[0])"
+      (click)="forwardWeek(weekDays[0])"
     ></a>
   </div>
-  <div class="calendar-slots">
-    <div class="calendar">
-      <div
-        class="days-slots"
-        *ngIf="availabilityByDay !== null; else loadingBlock"
-      >
-        <div class="day-slots" *ngFor="let day of availabilityByDay">
-          <div
-            class="slot-container"
-            [ngClass]="slot === ' - ' ? 'unavailable' : 'available'"
-            *ngFor="let slot of day"
-          >
-            <a class="slot-time" (click)="spot.emit(slot)">{{
-              slot === " - " ? slot : slot.start.slice(11, 16)
-            }}</a>
-          </div>
+  <div class="calendar">
+    <div
+      class="days-slots"
+      *ngIf="availabilityByDay !== null; else loadingBlock"
+    >
+      <div class="day-slots" *ngFor="let day of availabilityByDay">
+        <div
+          class="slot-container"
+          [ngClass]="slot === ' - ' ? 'unavailable' : 'available'"
+          *ngFor="let slot of day"
+        >
+          <a class="slot-time" (click)="selectedSpot(slot)">{{
+            slot === " - " ? slot : slot.start.slice(11, 16)
+          }}</a>
         </div>
       </div>
-      <ng-template #loadingBlock>
-        <mat-spinner color="accent" diameter="40" class="spinner"></mat-spinner>
-      </ng-template>
     </div>
+    <ng-template #loadingBlock>
+      <mat-spinner color="accent" diameter="40" class="spinner"></mat-spinner>
+    </ng-template>
   </div>
 </div>
