@@ -6,7 +6,10 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 
-type availabilityByDay = AvailabilitySlot[][];
+type AvailabilityByDay = AvailabilitySlot[][];
+interface AvailabilityHashmap {
+  [key: string]: AvailabilitySlot[];
+}
 
 @Component({
   selector: 'app-calendar',
@@ -18,7 +21,7 @@ export class CalendarComponent implements OnInit {
   today = moment().format('YYYY-MM-DD');
   firstDay = this.today;
   weekDays: string[];
-  availabilityByDay: availabilityByDay;
+  availabilityByDay: AvailabilityByDay;
   userLocale: string;
   userLocalTimezone: string;
   private professionalId: number = Number(this.route.snapshot.params['id']);
@@ -54,7 +57,7 @@ export class CalendarComponent implements OnInit {
   }
 
   private groupAvailabilityByDays() {
-    const initial = this.weekDays.reduce((acc, item) => {
+    const initial: AvailabilityHashmap = this.weekDays.reduce((acc, item) => {
       return { ...acc, [item]: [] };
     }, {});
     const availability = this.availabilitySlots.reduce((acc, item) => {

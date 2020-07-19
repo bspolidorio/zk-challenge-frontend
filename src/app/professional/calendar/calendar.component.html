@@ -54,7 +54,7 @@
   <div class="calendar">
     <div
       class="days-slots"
-      *ngIf="availabilityByDay.length > 0; else loadingBlock"
+      *ngIf="availabilityByDay?.length > 0; else loadingBlock"
     >
       <div class="day-slots" *ngFor="let day of availabilityByDay">
         <div
