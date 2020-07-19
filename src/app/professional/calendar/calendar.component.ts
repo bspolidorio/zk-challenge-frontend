@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfessionalsService } from 'src/app/shared/services/professionals.service';
+import {
+  ProfessionalsService,
+  AvailabilitySlot,
+} from 'src/app/shared/services/professionals.service';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+
+type availabilityByDay = AvailabilitySlot[][];
 
 @Component({
   selector: 'app-calendar',
@@ -9,19 +14,19 @@ import * as moment from 'moment';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
-  availabilitySlots = null;
+  availabilitySlots: AvailabilitySlot[] = [];
   today = moment().format('YYYY-MM-DD');
   firstDay = this.today;
   weekDays: string[];
-  availabilityByDay = null;
-  userLocale = null;
-  userLocalTimezone = null;
-  private professionalId = this.route.snapshot.params['id'];
-  private userTimezone = null;
+  availabilityByDay: availabilityByDay;
+  userLocale: string;
+  userLocalTimezone: string;
+  private professionalId: number = Number(this.route.snapshot.params['id']);
+  private userTimezone: string;
   private numberOfDays = 4;
   private lastDay = moment(this.firstDay).add(3, `days`).format('YYYY-MM-DD');
-  private startDate = null;
-  private endDate = null;
+  private startDate: string;
+  private endDate: string;
 
   constructor(
     private professionalsService: ProfessionalsService,
@@ -35,13 +40,13 @@ export class CalendarComponent implements OnInit {
 
   private loadAvailability(): void {
     this.getUserLocalTimezone();
-    this.getStartAndEndDays();
+    this.getStartAndEndDateTimes();
 
     this.professionalsService
       .getAvailability(this.professionalId, this.startDate, this.endDate)
       .subscribe(
-        (professional: any) => (
-          (this.availabilitySlots = professional),
+        (availabilitySlots) => (
+          (this.availabilitySlots = availabilitySlots),
           this.groupAvailabilityByDays(),
           this.fillEmptySlotsWithHyphen()
         )
@@ -52,7 +57,7 @@ export class CalendarComponent implements OnInit {
     const initial = this.weekDays.reduce((acc, item) => {
       return { ...acc, [item]: [] };
     }, {});
-    this.availabilityByDay = this.availabilitySlots.reduce((acc, item: any) => {
+    const availability = this.availabilitySlots.reduce((acc, item) => {
       item.start = moment(item.start).toISOString(true);
       item.end = moment(item.end).toISOString(true);
 
@@ -61,19 +66,19 @@ export class CalendarComponent implements OnInit {
       acc[date].push(item);
       return acc;
     }, initial);
-    this.availabilityByDay = Object.keys(this.availabilityByDay).map((date) => {
-      return this.availabilityByDay[date];
+    this.availabilityByDay = Object.keys(availability).map((date) => {
+      return availability[date];
     });
   }
 
-  private getWeekDays(firstDay): void {
+  private getWeekDays(firstDay: string): void {
     this.weekDays = [];
     for (let i = 0; i < this.numberOfDays; i++) {
       this.weekDays.push(moment(firstDay).add(i, 'days').format('YYYY-MM-DD'));
     }
   }
 
-  private getStartAndEndDays(): void {
+  private getStartAndEndDateTimes(): void {
     this.startDate = moment
       .parseZone(`${this.firstDay}T00:00:00${this.userTimezone}`)
       .utc()
@@ -111,13 +116,16 @@ export class CalendarComponent implements OnInit {
     for (let i = 0; i <= maxSlots; i++) {
       for (let x = 0; x < this.numberOfDays; x++) {
         if (this.availabilityByDay[x].length <= maxSlots)
-          this.availabilityByDay[x].push(' - ');
+          this.availabilityByDay[x].push({
+            start: '',
+            end: '',
+          });
       }
     }
   }
 
   private loadingPage(): void {
-    this.availabilityByDay = null;
+    this.availabilityByDay = [];
   }
 
   private getUserLocalTimezone(): void {
@@ -131,7 +139,11 @@ export class CalendarComponent implements OnInit {
       .timeZone.split('/')[1];
   }
 
-  selectedSpot(event) {
-    console.log(event);
+  isString(value: any) {
+    return typeof value === 'string';
+  }
+
+  selectedSpot(value: AvailabilitySlot) {
+    console.log(value);
   }
 }

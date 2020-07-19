@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Professional } from 'src/app/shared/services/professionals.service';
 
 @Component({
   selector: 'app-avatar',
@@ -6,6 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent {
-  @Input() professional;
-  @Input() stars;
+  @Input() professional: Professional;
+  @Input() stars: string[];
 }

@@ -54,16 +54,16 @@
   <div class="calendar">
     <div
       class="days-slots"
-      *ngIf="availabilityByDay !== null; else loadingBlock"
+      *ngIf="availabilityByDay.length > 0; else loadingBlock"
     >
       <div class="day-slots" *ngFor="let day of availabilityByDay">
         <div
           class="slot-container"
-          [ngClass]="slot === ' - ' ? 'unavailable' : 'available'"
+          [ngClass]="slot.start === '' ? 'unavailable' : 'available'"
           *ngFor="let slot of day"
         >
           <a class="slot-time" (click)="selectedSpot(slot)">{{
-            slot === " - " ? slot : slot.start.slice(11, 16)
+            slot.start === "" ? " - " : slot.start.slice(11, 16)
           }}</a>
         </div>
       </div>

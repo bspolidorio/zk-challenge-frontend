@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfessionalComponent implements OnInit {
   professional: Professional;
   stars: string[];
-  private professionalId = this.route.snapshot.params['id'];
+  private professionalId: number = Number(this.route.snapshot.params['id']);
 
   constructor(
     private professionalsService: ProfessionalsService,
@@ -25,7 +25,7 @@ export class ProfessionalComponent implements OnInit {
     this.loadProfessional(this.professionalId);
   }
 
-  private loadProfessional(professionalId): void {
+  private loadProfessional(professionalId: Professional['id']): void {
     this.professionalsService
       .getProfessional(professionalId)
       .subscribe(
