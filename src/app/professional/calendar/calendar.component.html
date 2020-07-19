@@ -19,29 +19,11 @@
         ></a
       ></ng-template>
     </div>
-    <div class="days">
+    <div class="days" *ngFor="let weekDay of weekDays">
       <div class="day">
-        <div class="week-day">{{ weekDays[0] | date: "EEE" }}</div>
+        <div class="week-day">{{ weekDay | date: "EEE" }}</div>
         <div class="month-day">
-          {{ weekDays[0] | date: "MMM" }} {{ weekDays[0] | date: "dd" }}
-        </div>
-      </div>
-      <div class="day">
-        <div class="week-day">{{ weekDays[1] | date: "EEE" }}</div>
-        <div class="month-day">
-          {{ weekDays[1] | date: "MMM" }} {{ weekDays[1] | date: "dd" }}
-        </div>
-      </div>
-      <div class="day">
-        <div class="week-day">{{ weekDays[2] | date: "EEE" }}</div>
-        <div class="month-day">
-          {{ weekDays[2] | date: "MMM" }} {{ weekDays[2] | date: "dd" }}
-        </div>
-      </div>
-      <div class="day">
-        <div class="week-day">{{ weekDays[3] | date: "EEE" }}</div>
-        <div class="month-day">
-          {{ weekDays[3] | date: "MMM" }} {{ weekDays[3] | date: "dd" }}
+          {{ weekDay | date: "MMM" }} {{ weekDay | date: "dd" }}
         </div>
       </div>
     </div>
