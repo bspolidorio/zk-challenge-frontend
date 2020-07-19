@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfessionalComponent } from './professional/professional.component';
 
 const routes: Routes = [
-  { path: '', component: ProfessionalComponent },
-  { path: '**', redirectTo: '' },
+  { path: 'professional/:id', component: ProfessionalComponent },
+  { path: '**', redirectTo: 'professional/1' },
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfessionalsService } from 'src/app/shared/services/professionals.service';
+import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
@@ -15,14 +16,17 @@ export class ScheduleComponent implements OnInit {
   availabilityByDay = null;
   userLocale = null;
   userLocalTimezone = null;
-  private professionalId = 1;
+  private professionalId = this.route.snapshot.params['id'];
   private userTimezone = null;
   private numberOfDays = 4;
   private lastDay = moment(this.firstDay).add(3, `days`).format('YYYY-MM-DD');
   private startDate = null;
   private endDate = null;
 
-  constructor(private professionalsService: ProfessionalsService) {}
+  constructor(
+    private professionalsService: ProfessionalsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loadAvailability();

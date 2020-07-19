@@ -4,6 +4,7 @@ import {
   ProfessionalsService,
   Professional,
 } from '../shared/services/professionals.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-professional',
@@ -13,17 +14,20 @@ import {
 export class ProfessionalComponent implements OnInit {
   professional: Professional;
   stars: string[];
-  private professionalId = 1;
+  private professionalId = this.route.snapshot.params['id'];
 
-  constructor(private professionalsService: ProfessionalsService) {}
+  constructor(
+    private professionalsService: ProfessionalsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.loadProfessional();
+    this.loadProfessional(this.professionalId);
   }
 
-  private loadProfessional(): void {
+  private loadProfessional(professionalId): void {
     this.professionalsService
-      .getProfessional(this.professionalId)
+      .getProfessional(professionalId)
       .subscribe(
         (professional) => ((this.professional = professional), this.getStars())
       );
