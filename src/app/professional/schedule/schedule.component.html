@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="schedule-header">
+    <div class="schedule-title">Schedule your session!</div>
+    <div class="schedule-timezone">
+      Timezone: {{ userLocale }} ({{ userLocalTimezone }})
+    </div>
+  </div>
+  <div class="calendar-control">
+    <div>
+      <a
+        *ngIf="weekDays[0] === today; else elseBlock"
+        class="back fa fa-chevron-circle-left disabled"
+      ></a>
+      <ng-template #elseBlock>
+        <a
+          class="back fa fa-chevron-circle-left"
+          aria-hidden="true"
+          (click)="backed.emit(weekDays[0])"
+        ></a
+      ></ng-template>
+    </div>
+    <div class="days">
+      <div class="day">
+        <div class="week-day">{{ weekDays[0] | date: "EEE" }}</div>
+        <div class="month-day">
+          {{ weekDays[0] | date: "MMM" }} {{ weekDays[0] | date: "dd" }}
+        </div>
+      </div>
+      <div class="day">
+        <div class="week-day">{{ weekDays[1] | date: "EEE" }}</div>
+        <div class="month-day">
+          {{ weekDays[1] | date: "MMM" }} {{ weekDays[1] | date: "dd" }}
+        </div>
+      </div>
+      <div class="day">
+        <div class="week-day">{{ weekDays[2] | date: "EEE" }}</div>
+        <div class="month-day">
+          {{ weekDays[2] | date: "MMM" }} {{ weekDays[2] | date: "dd" }}
+        </div>
+      </div>
+      <div class="day">
+        <div class="week-day">{{ weekDays[3] | date: "EEE" }}</div>
+        <div class="month-day">
+          {{ weekDays[3] | date: "MMM" }} {{ weekDays[3] | date: "dd" }}
+        </div>
+      </div>
+    </div>
+    <a
+      class="forward fa fa-chevron-circle-right"
+      aria-hidden="true"
+      (click)="forwarded.emit(weekDays[0])"
+    ></a>
+  </div>
+  <div class="calendar-slots">
+    <div class="calendar">
+      <div
+        class="days-slots"
+        *ngIf="availabilityByDay !== null; else loadingBlock"
+      >
+        <div class="day-slots" *ngFor="let day of availabilityByDay">
+          <div
+            class="slot-container"
+            [ngClass]="slot === ' - ' ? 'unavailable' : 'available'"
+            *ngFor="let slot of day"
+          >
+            <a class="slot-time" (click)="spot.emit(slot)">{{
+              slot === " - " ? slot : slot.start.slice(11, 16)
+            }}</a>
+          </div>
+        </div>
+      </div>
+      <ng-template #loadingBlock>
+        <mat-spinner color="accent" diameter="40" class="spinner"></mat-spinner>
+      </ng-template>
+    </div>
+  </div>
+</div>

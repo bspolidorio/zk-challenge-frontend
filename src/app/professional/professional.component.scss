@@ -1,0 +1,22 @@
+@import "responsive.mixin.scss";
+
+.container {
+  display: flex;
+  max-width: 920px;
+  margin: 100px auto;
+  @include screen("tablet") {
+    flex-direction: column;
+  }
+}
+
+.professional-info {
+  @include screen("tablet") {
+    margin: 0 auto;
+  }
+}
+
+.schedule {
+  @include screen("tablet") {
+    margin: 30px auto;
+  }
+}

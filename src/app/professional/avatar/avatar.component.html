@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="professional-avatar">
+    <div
+      class="professional-img"
+      [ngStyle]="{ 'background-image': 'url(' + professional.image + ')' }"
+    ></div>
+    <div class="professional-info">
+      <h2>{{ professional.name }}</h2>
+      <div class="info">
+        <span class="specialty">{{ professional.specialty }}</span>
+        <span class="pipe"> | </span>
+        <span class="locale">{{ professional.locale }}</span>
+      </div>
+      <div>
+        <span
+          class="stars fa fa-star"
+          aria-hidden="true"
+          *ngFor="let star of stars"
+        >
+        </span>
+        <span class="reviews">({{ professional.reviews }} reviews)</span>
+      </div>
+      <div class="pricing">
+        <span class="price">€{{ professional.price }}</span>
+        <span class="slash"> / </span>
+        <span class="time">{{ professional.time }} minutes</span>
+      </div>
+    </div>
+  </div>
+  <div class="professional-description">{{ professional.description }}</div>
+</div>

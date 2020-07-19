@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="professional-info">
+    <app-avatar [professional]="professional" [stars]="stars"></app-avatar>
+  </div>
+  <div class="schedule">
+    <app-schedule
+      [today]="today"
+      [weekDays]="weekDays"
+      [firstDay]="firstDay"
+      [availabilityByDay]="availabilityByDay"
+      [userLocalTimezone]="userLocalTimezone"
+      [userLocale]="userLocale"
+      (backed)="backWeek($event)"
+      (forwarded)="forwardWeek($event)"
+      (spot)="selectedSpot($event)"
+    ></app-schedule>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: "Fira Sans", sans-serif;
+  color: #4d5c65;
+}
+
+* {
+  letter-spacing: 1px;
+  line-height: 1.5;
+  font-family: "Fira Sans", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.disabled {
+  opacity: 0.5;
+}

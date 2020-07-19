@@ -1,0 +1,100 @@
+@import "responsive.mixin.scss";
+
+.container {
+  width: 550px;
+  padding: 0 15px;
+  cursor: pointer;
+
+  @include screen("tablet") {
+    width: 400px;
+  }
+  @include screen("phone") {
+    width: 300px;
+  }
+}
+
+.professional-avatar {
+  display: flex;
+  @include screen("phone") {
+    flex-direction: column;
+  }
+}
+
+.professional-img {
+  width: 180px;
+  height: 180px;
+  background-position: center top;
+  background-size: cover;
+  border-radius: 50%;
+
+  @include screen("phone") {
+    width: 130px;
+    height: 130px;
+    margin: auto;
+  }
+}
+
+.professional-info {
+  margin: 0 0 15px 20px;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px 0 0;
+    font-family: "Fira Sans", sans-serif;
+  }
+  @include screen("phone") {
+    margin: auto;
+    text-align: center;
+  }
+}
+
+.specialty {
+  color: #007bdb;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.pipe {
+  font-weight: 300;
+}
+
+.locale {
+  font-weight: 300;
+}
+
+.stars {
+  color: gold;
+  font-size: 16px;
+}
+
+.reviews {
+  margin-left: 3px;
+}
+
+.pricing {
+  margin-top: 5px;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.price {
+  font-size: 20px;
+}
+
+.slash {
+  font-size: 40;
+}
+
+.time {
+  text-transform: uppercase;
+}
+
+.professional-description {
+  margin-top: 20px;
+
+  @include screen("tablet") {
+    text-align: center;
+  }
+}
