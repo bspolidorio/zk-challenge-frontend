@@ -4,7 +4,7 @@ Angular framework App to show a professional and availability on a calendar from
 
 ## Installation
 
-Before installing, clone and install the [Backend](https://github.com/bspolidorio/zk-challenge-backend)
+Before running, clone and install the [Backend](https://github.com/bspolidorio/zk-challenge-backend)
 
 ```bash
 yarn install
